@@ -11,22 +11,62 @@
         <h1>Welcome to [Your Guild Name]</h1>
     </header>
     <main>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Your guild's description goes here.</p>
-        </section>
-        <section id="apply">
-            <h2>Apply to Our Guild</h2>
-            <form id="application-form">
-                <label for="char-name">Character Name:</label><br>
-                <input type="text" id="char-name" name="char-name" required><br>
-                <label for="class">Class:</label><br>
-                <input type="text" id="class" name="class" required><br>
-                <label for="message">Why you want to join:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br>
-                <button type="submit">Submit Application</button>
-            </form>
+    
+<h2>Apply to Our Guild</h2>
+<form id="application-form">
+    <label for="char-name">Character Name:</label><br>
+    <input type="text" id="char-name" name="char-name" required><br>
+    
+    <label for="class">Class:</label><br>
+    <input type="text" id="class" name="class" required><br>
+    
+    <label for="message">Why you want to join:</label><br>
+    <textarea id="message" name="message" rows="4" required></textarea><br>
+    
+    <button type="submit">Submit Application</button>
+    <p id="form-status"></p> <!-- To show success/error messages -->
+</form>
+
+  
         </section>
     </main>
+    <script>
+  const form = document.getElementById('application-form');
+  const statusMessage = document.getElementById('form-status');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {
+      charName: formData.get('char-name'),
+      charClass: formData.get('class'),
+      message: formData.get('message'),
+    };
+
+    const submitButton = form.querySelector('button');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
+    statusMessage.textContent = '';
+
+    fetch('/.netlify/functions/submit-application', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(result => {
+      statusMessage.textContent = 'Application submitted successfully! Thank you.';
+      form.reset();
+    })
+    .catch((error) => {
+      statusMessage.textContent = 'There was an error. Please try again later.';
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Submit Application';
+    });
+  });
+</script>
 </body>
 </html>
