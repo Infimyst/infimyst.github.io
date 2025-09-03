@@ -3,54 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apply to Guild</title>
+  <title>Apply to Life</title>
   <link rel="stylesheet" href="style.css">
+  
+  <!-- This is the font your Carrd site uses, we need it here too -->
+  <link href="https://fonts.googleapis.com/css2?display=swap&family=Staatliches:ital,wght@0,400;1,400&family=Alata:ital,wght@0,400;1,400&family=Abel:ital,wght@0,400;1,400" rel="stylesheet" type="text/css" />
 </head>
 <body class="is-loading">
+
+  <!-- 
+    STEP 1: Add the same #wrapper, #main, and .inner divs 
+    from your index.html. This gives us the page layout.
+  -->
   <div id="wrapper">
     <div id="main">
       <div class="inner">
-        <h1>Guild Application Form</h1>
 
-        <!-- This is the single, correct form tag. ID is important for the script. -->
+        <!-- A new header for the application page -->
+        <h1 id="text06">Application</h1>
+        <p id="text49">to <em><strong>Life</strong></em> on <em>Wyrmrest Accord</em></p>
+        <hr class="style1 full">
+
+        <!-- Your form goes here -->
         <form id="application-form">
-    
-    <label for="discord">Discord Name:</label><br>
-    <input type="text" id="discord" name="discord" required><br><br>
+          <label for="discord">Discord Name:</label>
+          <input type="text" id="discord" name="discord" placeholder="Discord Username" required>
 
-    <label for="character">Character Name & Server:</label><br>
-    <input type="text" id="character" name="character" required><br><br>
+          <label for="character">Character Name & Server:</label>
+          <input type="text" id="character" name="character" placeholder="Character-ServerName" required>
 
-    <label for="mainspec">Mainspec:</label><br>
-    <input type="text" id="mainspec" name="mainspec" required><br><br>
+          <label for="mainspec">What spec or specs do you prefer to play?:</label>
+          <input type="text" id="mainspec" name="mainspec" placeholder="Fury > Ret > Feral" required>
 
-    <label for="dealbreakers">What are your dealbreakers?</label><br>
-    <textarea id="dealbreakers" name="dealbreakers" rows="3" required></textarea><br><br>
+          <label for="dealbreakers">What are your dealbreakers?</label>
+          <textarea id="dealbreakers" name="dealbreakers" rows="4" required></textarea>
 
-    <label for="contacts">Do you know anyone in the guild? (Optional)</label><br>
-    <input type="text" id="contacts" name="contacts"><br><br>
+          <label for="contacts">Do you know anyone in the guild? (Optional)</label>
+          <input type="text" id="contacts" name="contacts">
 
-    <button type="submit">Submit Application</button>
-    
-    <!-- This paragraph will show status messages like "Success!" or "Error." -->
-    <p id="form-status"></p>
-  </form>
+          <button type="submit">Submit Application</button>
+          
+          <p id="form-status"></p>
+        </form>
 
-  <!-- This JavaScript does the magic:
-       1. It stops the page from reloading.
-       2. It sends the data to your discord-webhook.js function.
-  -->
+        <hr class="style1 full">
+        
+        <!-- A handy link to get back to the homepage -->
+        <ul class="buttons">
+            <li><a href="index.html" class="button">Return to Home</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Your existing script is perfect and goes at the bottom -->
   <script>
-    // Remove the is-loading class to show the content
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.classList.remove('is-loading');
-    });
+    document.body.classList.remove('is-loading');
 
     const form = document.getElementById('application-form');
     const statusMessage = document.getElementById('form-status');
 
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Stop the page from reloading
+      event.preventDefault();
 
       const submitButton = form.querySelector('button');
       submitButton.disabled = true;
@@ -66,7 +81,6 @@
         contacts: formData.get('contacts'),
       };
 
-      // The URL MUST match the name of your .js file inside netlify/functions/
       fetch('/.netlify/functions/discord-webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -80,13 +94,13 @@
       })
       .then(result => {
         statusMessage.textContent = 'Application submitted successfully! Thank you.';
-        statusMessage.style.color = 'green';
+        statusMessage.style.color = '#BAFFA8'; // Using your site's success color
         form.reset();
       })
       .catch((error) => {
         console.error('Error:', error);
         statusMessage.textContent = 'An error occurred. Please try again.';
-        statusMessage.style.color = 'red';
+        statusMessage.style.color = '#FF7373'; // Using your site's error color
       })
       .finally(() => {
         submitButton.disabled = false;
@@ -94,8 +108,5 @@
       });
     });
   </script>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

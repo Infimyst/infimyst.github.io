@@ -5739,3 +5739,117 @@
           margin-top: 0.215625rem;
         }
       }
+      /* --- GUILD APPLICATION FORM STYLES --- */
+
+/* The form container itself */
+#application-form {
+  width: 100%;
+  max-width: 60rem; /* Give it a max width so it doesn't get too wide */
+  margin: 2rem auto; /* Center it with some space */
+  text-align: left; /* Align labels to the left */
+}
+
+/* Style for the form labels */
+#application-form label {
+  display: block; /* Make each label take its own line */
+  margin-top: 1.5rem; /* Space above the label */
+  margin-bottom: .5rem; /* Space below the label */
+  font-family: 'Alata', sans-serif;
+  font-size: 1.0em;
+  color: #FF7373; /* Using the red accent from your theme */
+  font-weight: 400;
+}
+
+/* Common styles for text inputs and textareas */
+#application-form input[type="text"]{
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #1D1D26; /* A slightly darker shade from your theme */
+  border: 1px solid #30303B;
+  border-radius: 0.375rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1em;
+  font-family: 'Abel', sans-serif;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 1.5rem;
+}
+
+/* Add a larger gap specifically after the "Dealbreakers" textarea */
+#application-form #dealbreakers {
+  margin-bottom: 2.5rem; /* You can increase this value for even more space! */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #1D1D26; /* A slightly darker shade from your theme */
+  border: 1px solid #30303B;
+  border-radius: 0.375rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1em;
+  font-family: 'Abel', sans-serif;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 1.5rem;
+}
+
+/* Make input fields glow when you click on them */
+#application-form input[type="text"]:focus,
+#application-form textarea:focus {
+  outline: none;
+  border-color: #FF5E5E;
+  box-shadow: 0 0 0 3px rgba(255, 94, 94, 0.25);
+}
+
+/* The main submit button */
+#application-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.75rem;
+  background-color: #FF5E5E;
+  color: #FFFFFF;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 1.5em;
+  letter-spacing: 0.05rem;
+  font-weight: 400;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+/* The button hover effect */
+#application-form button[type="submit"]:hover {
+  background-color: #99FFA9 !important; /* The green success color from your theme */
+  color: #252530;
+}
+
+/* Style for a disabled button */
+#application-form button[type="submit"]:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* The status message (Success/Error) */
+#application-form #form-status {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: 'Alata', sans-serif;
+  font-size: 1.1em;
+  min-height: 1.5em; /* Prevent layout shift when message appears */
+}
+
+/* Back to Home Button (generic style for any .button) */
+.buttons a.button {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    background-color: #1D1D26;
+    color: #FFFFFF;
+    font-family: 'Alata', sans-serif;
+    font-size: 1em;
+    border-radius: 0.375rem;
+    transition: background-color 0.25s ease;
+}
+
+.buttons a.button:hover {
+    background-color: #FF5E5E !important;
+}
