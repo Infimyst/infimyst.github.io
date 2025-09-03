@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply to Guild</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Guild Application Form</h1>
+
+  <!-- The form no longer needs Netlify-specific attributes -->
+  <form id="application-form" method="post">
+    
+    <label for="discord">Discord Name:</label><br>
+    <input type="text" id="discord" name="discord" required><br><br>
+
+    <label for="character">Character Name & Server:</label><br>
+    <input type="text" id="character" name="character" required><br><br>
+
+    <label for="mainspec">Mainspec:</label><br>
+    <input type="text" id="mainspec" name="mainspec" required><br><br>
+
+    <label for="dealbreakers">What are your dealbreakers?</label><br>
+    <textarea id="dealbreakers" name="dealbreakers" rows="3" required></textarea><br><br>
+
+    <label for="contacts">Do you know anyone in the guild? (Optional)</label><br>
+    <input type="text" id="contacts" name="contacts"><br><br>
+
+    <button type="submit">Submit Application</button>
+    
+    <!-- This paragraph will show status messages to the user -->
+    <p id="form-status"></p>
+  </form>
+
+  <!-- This JavaScript captures the form data and sends it to your function -->
+  <script>
+    const form = document.getElementById('application-form');
+    const statusMessage = document.getElementById('form-status');
+
+    form.addEventListener('submit', function(event) {
+      // Prevent the form from submitting the default way
+      event.preventDefault();
+
+      const submitButton = form.querySelector('button');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
+      statusMessage.textContent = '';
+
+      // Create an object with the form data
+      const formData = new FormData(form);
+      const data = {
+        discord: formData.get('discord'),
+        character: formData.get('character'),
+        mainspec: formData.get('mainspec'),
+        dealbreakers: formData.get('dealbreakers'),
+        contacts: formData.get('contacts'),
+      };
+
+      // Send the data to your Netlify Function
+      // The URL is based on your function's filename
+      fetch('/.netlify/functions/discord-webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        if (!response.ok) {
+          // If the server response is not OK, throw an error to be caught below
+          return response.text().then(text => { throw new Error(text) });
+        }
+        return response.text();
+      })
+      .then(result => {
+        statusMessage.textContent = 'Application submitted successfully! Thank you.';
+        statusMessage.style.color = 'green';
+        form.reset(); // Clear the form fields
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        statusMessage.textContent = 'An error occurred. Please try again.';
+        statusMessage.style.color = 'red';
+      })
+      .finally(() => {
+        // Re-enable the button after the process is complete
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Application';
+      });
+    });
+  </script>
+
+</body>
+</html>
