@@ -41,6 +41,11 @@
        2. It sends the data to your discord-webhook.js function.
   -->
   <script>
+    // Remove the is-loading class to show the content
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.remove('is-loading');
+    });
+
     const form = document.getElementById('application-form');
     const statusMessage = document.getElementById('form-status');
 
