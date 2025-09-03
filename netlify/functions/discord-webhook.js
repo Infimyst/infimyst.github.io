@@ -8,7 +8,7 @@ exports.handler = async function(event) {
   }
 
   // Get the data from the our fetch request's body
-  const data = JSON.parse(event.body).payload.data;
+  const data = JSON.parse(event.body);
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
   // Your logic for building the fields is great
