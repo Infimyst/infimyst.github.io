@@ -303,7 +303,7 @@
       }
       #main > .inner {
         --padding-horizontal: 4rem;
-        --padding-vertical: 2rem;
+        --padding-vertical: 0rem;
         --spacing: 0rem;
         --width: 80rem;
         border-radius: var(--border-radius-tl) var(--border-radius-tr)
@@ -834,7 +834,7 @@
         letter-spacing: 1.025rem;
         width: calc(100% + 1.025rem);
         font-size: 5em;
-        line-height: 0.75;
+        line-height: 1;
         font-weight: 400;
       }
       #text06 mark {
@@ -5852,4 +5852,69 @@
 
 .buttons a.button:hover {
     background-color: #FF5E5E !important;
+}
+
+/* --- SLIDESHOW STYLES --- */
+#killshots-slider-track {
+  margin: -1.5rem auto; /* Give it some space above and below */
+}
+
+.splide__slide img {
+  scale: 0.90;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.625rem; /* Match the border radius of your main container */
+  display: block;
+}
+
+/* --- ADVANCED SLIDESHOW STYLES --- */
+
+/* Make the main splide container a positioning context */
+.splide {
+  position: relative;
+}
+
+/* Style the arrows */
+.splide__arrow {
+  position: absolute;   /* This lifts the arrows out of the normal document flow */
+  top: 50%;             /* Position them halfway down from the top */
+  transform: translateY(-50%); /* This perfectly centers them vertically */
+  
+  background: rgba(0, 0, 0, 0.5); /* Make them semi-transparent black */
+  border-radius: 50%;             /* Make them circles */
+  width: 2rem;                    /* Set a fixed width */
+  height: 2rem;                   /* Set a fixed height */
+  opacity: 0.2;                   /* Slightly transparent */
+  transition: opacity 0.25s ease;
+}
+
+.splide__arrow:hover {
+  opacity: 1; /* Fully opaque on hover */
+}
+
+/* Change the arrow icon color to white */
+.splide__arrow svg {
+  fill: #FF5E5E;
+}
+
+/* Position the 'previous' arrow on the left */
+.splide__arrow--prev {
+  left: 1rem; /* 1rem from the left edge of the image */
+}
+
+/* Position the 'next' arrow on the right */
+.splide__arrow--next {
+  right: 1rem; /* 1rem from the right edge of the image */
+}
+
+/* Style the pagination dots */
+.splide__pagination__page {
+  background: rgba(255, 255, 255, 0.5); /* Make the dots semi-transparent white */
+  opacity: 0.8;
+}
+
+/* Style the ACTIVE pagination dot */
+.splide__pagination__page.is-active {
+  background: #FF5E5E; /* Use your theme's red accent for the active dot */
+  transform: scale(1.5); /* Make the active dot bigger */
 }
