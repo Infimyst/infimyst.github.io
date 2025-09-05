@@ -99,13 +99,13 @@
         return response.text();
       })
       .then(result => {
-        statusMessage.textContent = 'Application submitted successfully! Thank you.';
+        statusMessage.textContent = 'Application submitted successfully! If you are accepted, you will be contacted on Discord within 48 hours. Thank you for applying!';
         statusMessage.style.color = '#BAFFA8'; // Using your site's success color
         form.reset();
       })
       .catch((error) => {
         console.error('Error:', error);
-        statusMessage.textContent = 'An error occurred. Please try again.';
+        statusMessage.textContent = 'Apologies! An error occurred. Please contact me via Discord. My username is: myst';
         statusMessage.style.color = '#FF7373'; // Using your site's error color
       })
       .finally(() => {
